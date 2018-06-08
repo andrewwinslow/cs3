@@ -2,6 +2,7 @@
 #ifndef WORDBLENDER_H
 #define WORDBLENDER_H
 
+#include <unordered_map>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -27,7 +28,7 @@ class WordBlender
 		// word2
 		// ...
 		// wordN
-		/
+		//
 		// where word1 < word2 < ... < wordN
 		//
 		// Must run in O(nk) time. 

@@ -19,7 +19,6 @@ void test_mining(BlockHeader genesis, int difficulty, int coins)
 	BlockHeader prev, cur;
 	unsigned char result[8];
 
-
 	// Mine some BatCoins! 
 	prev = genesis;
 	for (int i = 1; i <= coins; ++i)
@@ -40,7 +39,7 @@ void test_mining(BlockHeader genesis, int difficulty, int coins)
 		for (int j = 0; j < difficulty; ++j)
 			test(result[j] == 0);
 
-		// Uncomment the next line to print mined coins
+		// Uncomment the next statement to print the mined coins
 		//cout << cur.to_string() << endl;
 		prev = cur;
 	}
@@ -69,18 +68,19 @@ int main()
 	genesis.nonce[6] = 'u';
 	genesis.nonce[7] = 't';
 
+	srand('f' + 2018);
 
-	// Mine 10000 coins at difficulty 1
+	// Mine 2^17 coins at difficulty 1
 	bathash(genesis, genesis.prev); 
-	test_mining(genesis, 1, 10000);
+	test_mining(genesis, 1, 2*256*256);
 
-	// Mine 100 coins at difficulty 2
+	// Mine 2^9 coins at difficulty 2
 	bathash(genesis, genesis.prev); 
-	test_mining(genesis, 2, 100);
+	test_mining(genesis, 2, 2*256);
 
-	// Mine 1 coin at difficulty 3 
+	// Mine 2 coins at difficulty 3 
 	bathash(genesis, genesis.prev); 
-	test_mining(genesis, 3, 1);
+	test_mining(genesis, 3, 2);
 
 
 	cout << "Assignment complete." << endl;

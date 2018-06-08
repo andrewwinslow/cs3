@@ -65,10 +65,10 @@ int main()
 	test(W2.blend("micro", "gecko", 3) == "microugecko");
 	test(W2.blend("kebab", "debug", 3) == "kebabidebug");
 
-	test(W2.blend("latch", "shrub", 4) == "latcheapishrub");
+	test(W2.blend("latch", "shrub", 4) == "latchairishrub");
 	test(W2.blend("irate", "biome", 4) == "iraterrabbiome");
 	test(W2.blend("hoist", "abyss", 4) == "hoistakebabyss");
-	test(W2.blend("gulch", "shark", 4) == "gulcheapishark");
+	test(W2.blend("gulch", "shark", 4) == "gulchairishark");
 
 
 	WordBlender W3("six-letter-words.txt", 6);
@@ -81,14 +81,14 @@ int main()
 	test(W3.blend("advise", "desert", 5) == "advisectoriginsidesert");
 	test(W3.blend("unable", "secure", 5) == "unablengthreadvisecure");
 	test(W3.blend("actual", "define", 5) == "actualmostrainsidefine");
-	test(W3.blend("garden", "stones", 5) == "gardensureloadjustones");
+	test(W3.blend("garden", "stones", 5) == "gardensurefinewestones");
 	test(W3.blend("refine", "injury", 5) == "refineededitoriginjury");
 
-	test(W3.blend("animal", "medium", 6) == "animalpinevadamagenomedium");
-	test(W3.blend("advise", "desert", 6) == "advisectoriginsidecadesert");
-	test(W3.blend("config", "genome", 6) == "confignorepeattachangenome");
-	test(W3.blend("wooden", "newbie", 6) == "woodengagermanimalpinewbie");
-	test(W3.blend("animal", "animal", 6) == "animalmostrainsidebianimal");
+	test(W3.blend("animal", "medium", 6) == "animalfreditorangenomedium");
+	test(W3.blend("advise", "desert", 6) == "advisealeditoriginsidesert");
+	test(W3.blend("config", "genome", 6) == "confignorebaterrorangenome");
+	test(W3.blend("wooden", "newbie", 6) == "woodengagenomedianyonewbie");
+	test(W3.blend("animal", "animal", 6) == "animalfreditorangermanimal");
 	test(W3.blend("animal", "zebras", 6) == "");
 	test(W3.blend("verify", "animal", 6) == "");
 

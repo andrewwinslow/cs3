@@ -19,6 +19,7 @@ inline void _test(const char* expression, const char* file, int line)
 int main()
 {
 	// Setup
+	srand(2018 + 'f');
 	string maze, soln;
 
 
@@ -178,6 +179,49 @@ int main()
 	soln += "######################################o#\n";
 	test(solve(maze) == soln);
 
+	maze = "";
+	maze += "#########################################################\n";
+	maze += "     #        #     #     #              #     #         \n";
+	maze += "#  #   #    #   # #   # #   #          #   # #   #      #\n"; 
+	maze += "#########################################################\n";
+	soln = "";
+	soln += "#########################################################\n";
+	soln += "ooooo#oooooooo#ooooo#ooooo#oooooooooooooo#ooooo#ooooooooo\n";
+	soln += "#  #ooo#    #ooo# #ooo# #ooo#          #ooo# #ooo#      #\n"; 
+	soln += "#########################################################\n";
+	test(solve(maze) == soln);
+
+	for (int t = 0; t < 100; ++t)
+	{
+		// Randomized test to prevent hardcoding
+		maze = "";
+		maze += "##################################################\n";
+		maze += "                                                  \n";
+		maze += "#                                                #\n";
+		maze += "##################################################\n";
+		for (int i = 0; i < 4; ++i)
+		{
+			int offset = rand() % 5;
+			maze[58 + 10*i + offset] = '#';	
+			maze[108 + 10*i + 3 + offset] = '#';	
+			maze[108 + 10*i - 1 + offset] = '#';	
+			soln = maze;
+			int j = 51;
+			while (j < 101)
+			{
+				if (soln[j] == '#')
+				{
+					soln[j-1 + 51] = 'o';	
+					soln[j-1 + 52] = 'o';	
+					soln[j-1 + 53] = 'o';	
+				}
+				else
+					soln[j] = 'o';
+				++j;
+			} 	
+		}
+		test(solve(maze) == soln);
+	}
 
 	cout << "Assignment complete." << endl;
 }

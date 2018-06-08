@@ -4,8 +4,6 @@
 
 #include <vector>
 #include <string>
-#include <fstream>
-#include <cassert>
 
 using namespace std;
 
@@ -54,18 +52,13 @@ class Autocompleter
 			public:
 				Node()
 				{
-					this->end = false;
-					for (int i = 0; i < 3; ++i)
-					{
-						three[i].s = "";
-						three[i].freq = -1;
-					}
+					this->marked = false;
 					for (int i = 0; i < 256; ++i)
 						children[i] = nullptr; 
 				}
 
-				bool end;
-				Entry three[3];
+				bool marked;
+				vector<Entry> top;
 				Node* children[256];
 		};
 

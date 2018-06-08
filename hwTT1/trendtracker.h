@@ -13,7 +13,9 @@ class Trendtracker
 	// n is the number of hashtags in the Trendtracker.
 
 	public:
-		// Creates a new empty collection of hashtags.
+		// Creates a new Trendtracker tracking no hashtags.
+		// 
+		// Must run in O(1) time.
 		Trendtracker();
 
 		// Inserts a hashtag (tweeted 0 times) into the Trendtracker.
@@ -45,14 +47,14 @@ class Trendtracker
 		// Must run in O(n) time.
 		string top_trend();
 
-		// Fills the provided vector with the k most-tweeted hashtags, 
-		// in order of most-tweeted-to-least-tweeted.
+		// Fills the provided vector with the 3 most-tweeted hashtags, 
+		// in order from most-tweeted to least-tweeted.
 		// 
-		// If there are fewer than k hashtags, then the vector is filled
-		// with all hashtags (in most-tweeted-to-least-tweeted order).
+		// If there are fewer than 3 hashtags, then the vector is filled
+		// with all hashtags (in most-tweeted to least-tweeted order).
 		//
-		// Must run in O(nk) time.
-		void trending(int k, vector<string> &T); 
+		// Must run in O(n) time.
+		void top_three_trends(vector<string> &T); 
 
 	private: 
 		// A simple class representing a hashtag and 

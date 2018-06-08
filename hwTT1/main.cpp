@@ -170,70 +170,52 @@ int main()
 
 	Trendtracker T3;
 	test(T3.top_trend() == ""); 
-	T3.trending(1, R);
-	test(R.size() == 0);
-	T3.trending(2, R);
-	test(R.size() == 0);
-	T3.trending(3, R);
+	T3.top_three_trends(R);
 	test(R.size() == 0);
 
 	T3.insert("#programming");
 	test(T3.top_trend() == "#programming"); 
-	T3.trending(1, R);
-	test(R.size() == 1);
-	test(R[0] == "#programming");
-	T3.trending(2, R);
-	test(R.size() == 1);
-	test(R[0] == "#programming");
-	T3.trending(3, R);
+	T3.top_three_trends(R);
 	test(R.size() == 1);
 	test(R[0] == "#programming");
 
 	T3.tweeted("#programming");
 	test(T3.top_trend() == "#programming");
-	T3.trending(1, R);
+	T3.top_three_trends(R);
 	test(R.size() == 1);
 	test(R[0] == "#programming");
-	T3.trending(2, R);
-	test(R.size() == 1);
-	test(R[0] == "#programming");
-	T3.trending(3, R);
-	test(R.size() == 1);
-	test(R[0] == "#programming");
+
+	// At this point:
+	// programming: 1
 
 	T3.insert("#C++");
 	T3.tweeted("#C++");
 	T3.tweeted("#C++"); 
 	test(T3.top_trend() == "#C++"); 
-	T3.trending(1, R);
-	test(R.size() == 1);
-	test(R[0] == "#C++");
-	T3.trending(2, R);
+	T3.top_three_trends(R);
 	test(R.size() == 2);
 	test(R[0] == "#C++");
 	test(R[1] == "#programming");
-	T3.trending(3, R);
-	test(R.size() == 2);
-	test(R[0] == "#C++");
-	test(R[1] == "#programming");
+
+	// At this point:
+	// C++: 2
+	// programming: 1
 
 	T3.insert("#3333");
 	T3.tweeted("#3333");
 	T3.tweeted("#3333");
 	T3.tweeted("#3333");
 	test(T3.top_trend() == "#3333"); 
-	T3.trending(1, R);
-	test(R.size() == 1);
-	test(R[0] == "#3333");
-	T3.trending(2, R);
-	test(R.size() == 2);
-	test(R[0] == "#3333");
-	test(R[1] == "#C++");
-	T3.trending(3, R);
+	T3.top_three_trends(R);
 	test(R.size() == 3);
 	test(R[0] == "#3333");
 	test(R[1] == "#C++");
 	test(R[2] == "#programming");
+
+	// At this point:
+	// 3333: 3
+	// C++: 2
+	// programming: 1
 
 	T3.insert("#cs4all");
 	T3.tweeted("#cs4all");
@@ -241,14 +223,7 @@ int main()
 	T3.tweeted("#cs4all");
 	T3.tweeted("#cs4all");
 	test(T3.top_trend() == "#cs4all");
-	T3.trending(1, R);
-	test(R.size() == 1);
-	test(R[0] == "#cs4all");
-	T3.trending(2, R);
-	test(R.size() == 2);
-	test(R[0] == "#cs4all");
-	test(R[1] == "#3333");
-	T3.trending(3, R);
+	T3.top_three_trends(R);
 	test(R.size() == 3);
 	test(R[0] == "#cs4all");
 	test(R[1] == "#3333");
@@ -265,12 +240,11 @@ int main()
 	T3.tweeted("#programming");
 	T3.tweeted("#programming");
 	test(T3.top_trend() == "#programming");
-	T3.trending(5, R);
-	test(R.size() == 4);
+	T3.top_three_trends(R);
+	test(R.size() == 3);
 	test(R[0] == "#programming");
 	test(R[1] == "#cs4all");
 	test(R[2] == "#3333");
-	test(R[3] == "#C++");
 
 	// At this point:
 	// programming: 5
@@ -282,12 +256,11 @@ int main()
 	T3.tweeted("#cs4all");
 	T3.tweeted("#3333");
 	test(T3.top_trend() == "#cs4all");
-	T3.trending(5, R);
-	test(R.size() == 4);
+	T3.top_three_trends(R);
+	test(R.size() == 3);
 	test(R[0] == "#cs4all");
 	test(R[1] == "#programming");
 	test(R[2] == "#3333");
-	test(R[3] == "#C++");
 	 
 	// At this point:
 	// cs4all: 6
@@ -298,19 +271,16 @@ int main()
 	for (int i = 0; i < 10000; ++i)
 		T3.tweeted("#C++");
 	test(T3.top_trend() == "#C++");
-	T3.trending(5, R);
-	test(R.size() == 4);
+	T3.top_three_trends(R);
+	test(R.size() == 3);
 	test(R[0] == "#C++");
 	test(R[1] == "#cs4all");
 	test(R[2] == "#programming");
-	test(R[3] == "#3333");
 
 
 		
-	// Tests with large data
 	Trendtracker T4;
 
-	// Test insert() 
 	ifstream f;
 	f.open("common.txt");
 	assert(f.is_open()); // If this fails, you're missing common.txt
@@ -319,35 +289,26 @@ int main()
 	f.close();
 	test(T4.size() == 3597); 
 
-	// Test tweeted() 
 	f.open("common.txt");
 	while (getline(f, line))
 		T4.tweeted(line);
 	f.close();
 
-	// Test popularity() 
-	f.open("common.txt");
 	for (int i = 0; i < 1000; ++i)
-	{	
-		getline(f, line);
-		test(T4.popularity(line) > 0);
-	}
-	f.close();
+	{
+		test(T4.popularity("#finishing") == 6);
+		test(T4.popularity("#completely") == 5);
+		test(T4.popularity("#is") == 4);
+		test(T4.popularity("#sometimes") == 3);
+		test(T4.popularity("#quieting") == 2);
 
-	// Test top_trend() 
-	for (int i = 0; i < 1000; ++i)
 		test(T4.top_trend() == "#finishing");
 
-	// Test trending() 
-	for (int i = 0; i < 1000; ++i)
-		T4.trending(10, R);
-	test(R[0] == "#finishing");
-	test(R[1] == "#discovering");
-
-	for (int i = 0; i < 100; ++i)
-		T4.trending(1000, R);
-	test(R[0] == "#finishing");
-	test(R[1] == "#discovering");
+		T4.top_three_trends(R);
+		test(R[0] == "#finishing");
+		test(R[1] == "#completely");
+		test(R[2] == "#is");
+	}
 
 
 	cout << "Assignment complete." << endl;

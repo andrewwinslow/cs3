@@ -9,7 +9,15 @@ using namespace std;
 class BlockHeader
 {
 	public:
+		// Initializes a new BlockHeader to all zeroes
 		BlockHeader();
+
+		// Returns a string representation of the BlockHeader values.
+		// For example:
+		//
+		//  prev: 114  64 204  51 183  55   8 239
+		// nonce:  39 196 114 213  34  95 241  38
+		//
 		string to_string();
 
 		// These store 8 bytes of information each,

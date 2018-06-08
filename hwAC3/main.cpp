@@ -1,4 +1,5 @@
-
+#include <fstream>
+#include <cassert>
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -106,12 +107,6 @@ int main()
 
 	animals.insert("horse", 58453720);
 	test(animals.size() == 16);
-
-	animals.insert("bullfrog", 273571);
-	test(animals.size() == 17);
-
-	animals.insert("deer", 10007644); 
-	test(animals.size() == 17);
 
 	animals.insert("bullfrog", 273571);
 	test(animals.size() == 17);

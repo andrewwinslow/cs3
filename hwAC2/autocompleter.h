@@ -4,8 +4,6 @@
 
 #include <vector>
 #include <string>
-#include <fstream>
-#include <cassert>
 
 using namespace std;
 
@@ -57,7 +55,7 @@ class Autocompleter
 			public:
 				Node()
 				{
-					height = -1;
+					height = 0;
 					left = right = nullptr;
 				}
 
@@ -94,16 +92,13 @@ class Autocompleter
 		// Should run in O(n) time.
 		int size_recurse(Node* root);
 
-		// Fills T with the three most-frequent completions of x
-		// that are either:
-		// -In the BST rooted at root.
-		// -Already in T.
+		// Fills C with the completions of x in the BST rooted at root.
 		//
 		// Should run in O(log(n) + k), where
 		// -n is the size of the BST rooted at root.
 		// -k is the number of Entrys in the BST rooted at root
 		//  whose strings start with x.
-		void completions_recurse(string x, Node* root, vector<Entry> &T);
+		void completions_recurse(string x, Node* root, vector<Entry> &C);
 
 		// Inserts an Entry into an AVL tree rooted at root.
 		//

@@ -26,7 +26,6 @@
 #disappeared
 #interesting
 #grandfather
-#discovering
 #straightest
 #controllers
 #controlling
@@ -40,17 +39,20 @@
 #continuing
 #controlled
 #stationing
+#completely
 #controller
 #straighter
 #stretching
 #businesses
 #somebodies
+#completely
 #soldiering
 #countering
 #darknesses
 #situations
 #directions
 #disappears
+#completely
 #younglings
 #suggesting
 #afternoons
@@ -62,6 +64,7 @@
 #everything
 #everywhere
 #explaining
+#completely
 #explainers
 #expression
 #branchings
@@ -118,6 +121,7 @@
 #somewhere
 #troubling
 #companies
+#finishing
 #companied
 #beautiful
 #computers
@@ -127,6 +131,7 @@
 #youngling
 #continues
 #continued
+#finishing
 #traveller
 #traveling
 #yellowing
@@ -147,6 +152,8 @@
 #creatures
 #crossings
 #accepting
+#sometimes
+#sometimes
 #daughters
 #belonging
 #situation
@@ -197,6 +204,7 @@
 #surprises
 #waterings
 #branching
+#finishing
 #revealing
 #returning
 #surfacing
@@ -585,6 +593,7 @@
 #writings
 #beaching
 #question
+#quieting
 #trucking
 #callings
 #stranger
@@ -3585,9 +3594,11 @@
 #as
 #hi
 #go
+#is
 #if
 #of
 #am
+#is
 #up
 #to
 #we
@@ -3596,5 +3607,6 @@
 #or
 #it
 #be
+#is
 #an
 #i

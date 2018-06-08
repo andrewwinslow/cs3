@@ -2,6 +2,8 @@
 #ifndef TRENDTRACKER_H
 #define TRENDTRACKER_H
 
+#include <cassert>
+#include <fstream>
 #include <vector>
 #include <string>
 
@@ -13,16 +15,20 @@ class Trendtracker
 	// n is the number of hashtags in the Trendtracker.
 
 	public:
-		// Creates a new empty collection of hashtags.
-		Trendtracker();
-	
-		// Inserts a hashtag (tweeted 0 times) into the Trendtracker.
-		// If the hashtag already is in Trendtracker, does nothing.
+		// Creates a Trendtracker containing hashtags 
+		// found in the provided file.
+		// The file is promised to have the following format: 
 		// 
-		// Must run in O(log(n)) time if the hashtag is already in 
-		// the Trendtracker, and O(n) time otherwise.
-		void insert(string ht);
-
+		// string1 
+		// string2 
+		// ...
+		// stringN 
+		//
+		// where string1 < string2 < ... < stringN 
+		// 
+		// Must run in O(n) time.
+		Trendtracker(string filename);
+	
 		// Return the number of hashtags in the Trendtracker.
 		//
 		// Must run in O(1) time.
@@ -46,14 +52,14 @@ class Trendtracker
 		// Must run in O(1) time.
 		string top_trend();
 
-		// Fills the provided vector with the k most-tweeted hashtags, 
-		// in order of most-tweeted-to-least-tweeted.
+		// Fills the provided vector with the 3 most-tweeted hashtags, 
+		// in order from most-tweeted to least-tweeted.
 		// 
-		// If there are fewer than k hashtags, then the vector is filled
-		// with all hashtags (in most-tweeted-to-least-tweeted order).
+		// If there are fewer than 5 hashtags, then the vector is filled
+		// with all hashtags (in most-tweeted to least-tweeted order).
 		//
-		// Must run in O(k) time.
-		void trending(int k, vector<string> &T); 
+		// Must run in O(1) time.
+		void top_three_trends(vector<string> &T); 
 
 	private: 
 		// A simple class representing a hashtag and 
@@ -66,25 +72,18 @@ class Trendtracker
 		};
 
 		// Optional helper method.
-		// Returns the index in S of the hashtag with the given name. 
-		// I.e. the index i such that H[S[i]]->name == name.
+		// Returns the index of E containing an Entry with hashtag ht.
+		// If no such hashtag is found, returns -1. 
 		// 
-		// Should run in O(log(n)) time.
-		int S_index(string ht);
+		// Should run in O(log(n)).
+		int search(string ht);
 
-		// Optional helper method to return the lowest index in E
-		// containing an Entry with the specified pop.
-		// 
-		// Should run in O(log(n)) time.
-		int lowest_E_index_with_pop(int pop);
-
-
-		// Stores indices of Entries in E.
-		// Sorted lexicographically by hashtag (small-to-large).
-		vector<int> S;      
-
-		// Entries sorted by number of tweets (large-to-small).
+		// Entries sorted (lexicographically) by hashtag.
 		vector<Entry> E; 
+
+		// Stores indices of the (up to) three most-tweeted
+		// entries in E.
+		vector<int> S;      
 };
 
 #endif 
