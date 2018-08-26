@@ -11,13 +11,8 @@ using namespace std;
 
 class WordBlender
 {
-	// For the mandatory running times below:
-	// 
-	// n is the number of words in the provided file.
-	// 
-	// k is the max_word_count.
-	// 
-	// Assume that all strings have length O(1).
+        // For the running times below,
+	// assume that all strings have length O(1).
 
 	public:
 		// Constructs a Wordblender that creates blend words 
@@ -31,13 +26,15 @@ class WordBlender
 		//
 		// where word1 < word2 < ... < wordN
 		//
-		// Must run in O(nk) time. 
+		// Must run in O(nk) time, where:
+                // n is the number of words in the file
+                // k equals max_word_count 
 		WordBlender(string filename, int max_word_count);
 
-		// Returns the lexicographically first blend word that:
+		// Returns a blend word that:
 		// -Starts and ends with the given words
 		// -Otherwise consists entirely of words found in filename
-		// -Consists of word_count words.
+		// -Consists of word_count total words.
 		//
 		// If no such blend word exists, returns "". 
 		// 

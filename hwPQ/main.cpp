@@ -358,57 +358,6 @@ int main()
 		prev_p = p;
 	}
 
-	
-	// Small test of everything with a different type (char)
-	MinPriorityQueue<char> Q9;
-
-	test(Q9.size() == 0);
-	Q9.push('a', 10);
-	test(Q9.size() == 1);
-	Q9.push('c', 6);
-	test(Q9.size() == 2);
-	Q9.push('f', 8);
-	test(Q9.size() == 3);
-	Q9.push('m', 7);
-	test(Q9.size() == 4);
-	Q9.push('z', 15);
-	test(Q9.size() == 5);
-	Q9.push('q', 11);
-	test(Q9.size() == 6);
-	Q9.push('d', 3);
-	test(Q9.size() == 7);
-	
-	test(Q9.front() == 'd');
-	Q9.pop(); 
-	test(Q9.size() == 6);
-
-	test(Q9.front() == 'c');
-	Q9.pop(); 
-	test(Q9.size() == 5);
-
-	test(Q9.front() == 'm');
-	Q9.pop(); 
-	test(Q9.size() == 4);
-
-	test(Q9.front() == 'f');
-	Q9.decrease_key('q', 2);
-
-	test(Q9.front() == 'q');
-	Q9.pop(); 
-	test(Q9.size() == 3);
-
-	test(Q9.front() == 'f');
-	Q9.pop(); 
-	test(Q9.size() == 2);
-
-	test(Q9.front() == 'a');
-	Q9.pop(); 
-	test(Q9.size() == 1);
-
-	test(Q9.front() == 'z');
-	Q9.pop(); 
-	test(Q9.size() == 0);
-
 
 	cout << "Assignment complete." << endl;
 }

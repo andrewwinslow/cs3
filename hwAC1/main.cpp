@@ -52,7 +52,7 @@ int main()
 	test(animals.size() == 13);
 
 	Autocompleter words("words.txt");
-	test(words.size() == 300000);
+	test(words.size() == 293147);
 
 
 	// Test completions() 

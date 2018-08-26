@@ -34,7 +34,7 @@ void interactive_mode()
 		++i;
 	}
 	f.close();
-	assert(i == 300000); // If this fails, words2.txt is wrong
+	assert(i == 293147); // If this fails, words2.txt is wrong
 
 	vector<string> C;
 	while (cin)
@@ -96,7 +96,7 @@ int main()
 			stoi(line.substr(line.find_last_of(" ")+1)));
 	}
 	f.close();
-	test(words.size() == 300000);
+	test(words.size() == 293147);
 	
 
 	animals.insert("buffalo", 17808542);

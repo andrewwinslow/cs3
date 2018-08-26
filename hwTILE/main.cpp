@@ -18,7 +18,7 @@ inline void _test(const char* expression, const char* file, int line)
 int main()
 {
 	// Setup
-	srand('f' + 2018);
+        srand(2018 + 'f');
 	string floor;
 	
 
@@ -84,6 +84,14 @@ int main()
 	floor += "# # #\n";        
 	floor += "#####\n"; 
 	test(has_tiling(floor));
+
+        floor = "";
+        floor += "########\n";
+        floor += "## ## ##\n";
+        floor += "#      #\n";
+        floor += "## ## ##\n";
+        floor += "########\n";
+        test(!has_tiling(floor));
 
 	floor = "";
 	floor += "#####\n"; 
@@ -268,102 +276,44 @@ int main()
 	floor += "##########\n";
 	test(!has_tiling(floor));
 
-	floor = "";
-	floor += "##################################################\n";
-	floor += "#                      ###########################\n";
-	floor += "##################################################\n";
-	floor += "#                       ##########################\n";
-	floor += "##################################################\n";
-	floor += "#                        #########################\n";
-	floor += "##################################################\n";
-	test(!has_tiling(floor));
-
-	floor = "";
-	floor += "##################################################\n";
-	floor += "#                      ###########################\n";
-	floor += "##################################################\n";
-	floor += "#                          #######################\n";
-	floor += "##################################################\n";
-	floor += "#                        #########################\n";
-	floor += "##################################################\n";
-	test(has_tiling(floor));
-
-	for (int i = 0; i < 100; ++i)
-	{
-		bool tileable = true;
-
-		floor = "";
-		floor += "##################################################\n";
-		for (int j = 0; j < 50; ++j)
-		{
-			string floor_row("#"); 
-			int l = rand() % 48;
-			tileable = tileable && ((l % 2) == 0);
-			for (int k = 0; k < l; ++k)		
-				floor_row += ' ';	
-			for (int k = 1+l; k < 50; ++k)		
-				floor_row += '#';	
-			floor_row += "\n";	
-			floor += floor_row;
-			floor += "##################################################\n";
-
-		}		
-
-		test(has_tiling(floor) == tileable);
-	}	
-	
-	floor = "";
-	floor += "##################################################\n";
-	floor += "###  ###########  ###  ######  #####    ####  ####\n";
-	floor += "#  ###  ###  ####  ########  ######  #######  ####\n";
-	floor += "#####  #########  ######  ###########  ###  ######\n";
-	floor += "##################################################\n";
-	test(has_tiling(floor));
-
-	floor = "";
-	floor += "##################################################\n";
-	floor += "###  ###########  ###  ######  #####    ####  ####\n";
-	floor += "#  ###  ###  ####  #######   ######  #######  ####\n";
-	floor += "#####  #########  ######  ###########  ###  ######\n";
-	floor += "##################################################\n";
-	test(!has_tiling(floor));
-
-	for (int i = 0; i < 100; ++i)
-	{
-		floor = "";
-		for (int j = 0; j < 50; ++j)
-			floor += "##################################################\n";
-
-		for (int j = 0; j < 100; ++j)
-		{
-			int row = (rand() % 48) + 1;
-			int col = (rand() % 47) + 1;
-			int loc = 51*row + col;
-
-			if (floor[loc] == ' ' || floor[loc+1] == ' ')
-				continue;	
-
-			floor[loc] = ' ';
-			floor[loc+1] = ' ';
-		}		
-
-		bool tileable = rand() % 2;
-		if (!tileable)
-		{
-			while (true)
-			{
-				int row = (rand() % 48) + 1;
-				int col = (rand() % 48) + 1;
-				int loc = 51*row + col;
-				if (floor[loc] == ' ')
-					continue;
-				floor[loc] = ' ';
-			}
-		}
-		cout << floor << endl << endl;
-		cout << has_tiling(floor) << " " << tileable << endl;
-		test(has_tiling(floor) == tileable);
-	}	
+        // Try some random mazes
+        for (int trial = 0; trial < 500; ++trial)
+        {
+                bool ok = static_cast<bool>(rand() % 2);
+                int height = 6 + (rand() % 10); 
+                int width = 7 + (rand() % 10); 
+                floor = "";
+                for (int i = 0; i < height; ++i) 
+                {
+                        string row;
+                        for (int j = 0; j < width; ++j)
+                                row += "#";
+                        if (i != 0 && i != height-1)
+                        {
+                                int ko = 1 + (rand() % (width-3));
+                                row[ko] = ' ';
+                                row[ko+1] = ' ';                        
+                        }
+                        floor += row + '\n';
+                }
+                
+                if (ok)
+                {
+                        test(has_tiling(floor));
+                        continue;
+                }
+                
+                int bad_row = 1 + (rand() % (height-3)); 
+                int start = bad_row * (width + 1) + 1; 
+                while (floor[start] == ' ')
+                        ++start;
+                floor[start] = ' ';
+                int end = bad_row * (width + 1) + width - 2;
+                while (floor[end] == ' ')
+                        --end;
+                floor[end] = ' ';
+                test(!has_tiling(floor)); 
+        }
 
 
 	cout << "Assignment complete." << endl;
